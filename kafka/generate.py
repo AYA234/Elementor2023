@@ -4,7 +4,7 @@ import time
 import json
 import threading
 from faker import Faker
-from Elementor2023.stream import _stream
+from stream import _stream
 faker = Faker()
 
 
@@ -88,16 +88,16 @@ class GenerateFakeData:
             self.sites_id.append(fake_site['site_id'])
 
     def generate_fake_metrics(self,format):
-        i=2000
+
         while True:
             for site_id in self.sites_id:
                 fake_metrics = self.fake_metrics(site_id)
                 self.metrics_list.append(fake_metrics)
                 metrics_file = f'fake_metrics.{format}'
-                fake_metrics['metrics']['id']=i
+
                 
                 self.d.streaming_data(fake_metrics)
-                i+=1
+
                 
             time.sleep(30) 
 

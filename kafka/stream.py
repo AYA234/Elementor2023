@@ -12,8 +12,7 @@ class _stream:
     'disc_b_gb': data['metrics'].get('disc_b_gb', 0.0),
     'disc_cache': data['metrics'].get('disc_cache', 0.0),
     'time': 'Tue, 04 Jul 2023 12:57:44 GMT',
-    "id": data['metrics'].get('id'),
-    'site_id': 1,
+    'site_id' : data["identifier"]["site_id"].get('site_id',0.0),
     'storage_gb': data['metrics'].get('storage_gb', 0.0),
     'cpu_tic' :data['metrics'].get('cpu_tic', 0.0)
 }
