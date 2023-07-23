@@ -1,29 +1,34 @@
 import producer
+import datetime
 
-class _stream:
+class stream:
     def __init__(self):
-
-        self.producer=producer._producer()
-
+        self.producer=producer.producer()
+        
     def __format_data(self,data):
-            formatted_data = {
-    'cpu_percent': data['metrics'].get('cpu_percent', 0.0),
-    'disc_a_gb': data['metrics'].get('disc_a_gb', 0.0),
-    'disc_b_gb': data['metrics'].get('disc_b_gb', 0.0),
-    'disc_cache': data['metrics'].get('disc_cache', 0.0),
-    'time': 'Tue, 04 Jul 2023 12:57:44 GMT',
-    'site_id' : data["identifier"]["site_id"].get('site_id',0.0),
-    'storage_gb': data['metrics'].get('storage_gb', 0.0),
-    'cpu_tic' :data['metrics'].get('cpu_tic', 0.0)
-}
-            return formatted_data
+        formatted_data = {
+            'cpu_percent': data['metrics'].get('cpu_percent'),
+            'time': datetime.datetime.fromtimestamp(data['event_time']).strftime('%a, %d %b %Y %H:%M:%S GMT'),
+            'site_id' : data['identifier']['site_id'],
+            'storage_gb': data['metrics'].get('storage_gb'),
+            'ai_tokens_amount':data['metrics'].get('ai_tokens_amount')
             
-  
+}
+        return formatted_data
+            
+
                
 
         
-    def streaming_data(self,data):
+    def stream_matric(self,data):
+        topic = 'messages'
         formatted_data = self.__format_data(data)
         print(formatted_data.get('site_id'))
-        self.producer.writing_data(formatted_data)
+        self.producer.writing_data(formatted_data,topic)
         
+    def stream_order(self,data):
+        topic='messages'
+
+
+        self.producer.writing_data(data,topic)
+
