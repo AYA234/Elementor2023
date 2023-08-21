@@ -13,7 +13,7 @@ class Users(Base):
     email = Column(String)
     address = Column(String)
     phone_number = Column(String)
-    password = Column(Integer)
+    password = Column(String)
 
 
 class Packages(Base):
@@ -57,4 +57,3 @@ class UsagePerSite(Base):
     storage_gb = Column(Float)
     cpu_percent = Column(Float)
     ai_tokens_amount=Column(Integer)
-

@@ -7,9 +7,7 @@ from faker import Faker
 from stream import _stream
 faker = Faker()
 
-
 class GenerateFakeData:
-    
     def __init__(self):
         self.d = _stream()
         self.users_list = []
@@ -88,17 +86,12 @@ class GenerateFakeData:
             self.sites_id.append(fake_site['site_id'])
 
     def generate_fake_metrics(self,format):
-
         while True:
             for site_id in self.sites_id:
                 fake_metrics = self.fake_metrics(site_id)
                 self.metrics_list.append(fake_metrics)
                 metrics_file = f'fake_metrics.{format}'
-
-                
-                self.d.streaming_data(fake_metrics)
-
-                
+                self.d.streaming_data(fake_metrics)             
             time.sleep(30) 
 
     def init_fake_data(self, format):
@@ -107,7 +100,7 @@ class GenerateFakeData:
         with open(users_file, "w") as file:
             json.dump(self.users_list, file)
         print(f"Fake users have been exported to {users_file}")
-
+        
         self.generate_fake_sites()
         sites_file = f'fake_sites.{format}'
         with open(sites_file, "w") as file:
@@ -119,12 +112,7 @@ class GenerateFakeData:
         with open(metrics_file, "w") as file:
             json.dump(self.metrics_list, file)
         print(f"Fake metrics have been exported to {metrics_file}")
-
- 
-
-            
-        
-            
+     
 fake_data_generator = GenerateFakeData()
 fake_data_generator.init_fake_data('json')
 

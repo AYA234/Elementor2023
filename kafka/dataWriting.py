@@ -79,7 +79,7 @@ class DataWriting:
         user_id = data.get('user_id')
         site_id = data.get('site_id')
         if site_id is None or site_id is None:
-            return jsonify({'error': 'Missing user_id or site_id'}), 400
+            return 'error'
 
         session = self.Session()
         site = Sites(user_id=user_id, site_id=site_id)
@@ -156,3 +156,27 @@ class DataWriting:
         session.close()
 
         return site
+    def update_user(self,data):
+        
+        session = self.Session()
+        user_id=data['user_id']
+        user = session.query(Users).filter(Users.user_id == user_id).first()
+        user.first_name = data.get('first_name', user.first_name)
+        user.last_name = data.get('last_name', user.last_name)
+        user.email = data.get('email', user.email)
+        user.address = data.get('address', user.address)
+        user.phone_number = data.get('phone_number', user.phone_number)
+        session.commit()
+        session.close()
+
+    def update_site(self,data):
+        site_id = data.get('site_id')
+        session = self.Session()
+        site = session.query(Sites).filter(Sites.site_id == site_id).first()
+
+        site.site_id = data.get('site_id')
+        site.user= data.get('user_id')
+        session.commit()
+        session.close()
+        
+        return jsonify({'message': 'Site updated successfully'})

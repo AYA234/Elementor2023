@@ -9,7 +9,7 @@ connection = psycopg2.connect(
     host=host,
     port=port,
     database="postgres",
-    user=user,
+    user="user",
     password=password
 )
 connection.autocommit = True
