@@ -309,9 +309,7 @@ class generate_fake_data:
         print(f"Fake user to package has been exported to {user_package}")
         
 fake_data_generator = generate_fake_data()
-
 fake_data_generator.init_fake_data('json')
-
 fake_data_generator.fake_metrics_for_half_year_ahead('json')
 fake_data_generator.fake_orders_ahead('json')
 
